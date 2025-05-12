@@ -1,12 +1,14 @@
-[![Build Status](https://travis-ci.com/ochrin/coremark.svg?branch=master)](https://travis-ci.com/ochrin/coremark)
-
 # CoreMark
+
+![GitHub Release](https://img.shields.io/github/v/release/kreier/coremark)
+![GitHub License](https://img.shields.io/github/license/kreier/coremark)
+
 Starts a FreeRTOS task to run CoreMark benchmark.
 
 See [EEMBC](https://github.com/eembc/coremark) for more details.
 
 ## Current results
-Between parenthesis result with -O0 for comparaison, otherwise -O3 is used to compile Coremark.
+Between parenthesis result with `-O0` for comparaison, otherwise `-O3` is used to compile Coremark.
 
 | Processor       | Freq (MHz) | CoreMark     | CoreMark/MHz |
 | :-------------- | :--------- | :----------- | ------------ |
@@ -24,28 +26,32 @@ Between parenthesis result with -O0 for comparaison, otherwise -O3 is used to co
 (larger numbers are better)
 
 ## How to install
+
 See [Espressif](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain) for latest procedure
 
 ### Prerequisite (on Ubuntu)
-```
-sudo apt install gcc git wget make libncurses-dev flex bison gperf python python-serial screen
+
+``` sh
+sudo apt install gcc git wget make libncurses-dev flex bison gperf python3 python3-serial python3-pip screen
 ```
 
-### Get compiler
-```
-cd 
-wget https://dl.espressif.com/dl/xtensa-lx106-elf-linux64-1.22.0-100-ge567ec7-5.2.0.tar.gz
-tar xvzf xtensa-lx106-elf-linux64-1.22.0-100-ge567ec7-5.2.0.tar.gz
+### Get compiler and Toolchain
+
+``` sh
+mkdir -p ~/esp
+cd ~/esp
+wget https://dl.espressif.com/dl/xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz
+tar -xzf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz
+export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin"
 ```
 
-### Get SDK
+### Get RTOS SDK
+
 ```
-cd
-mkdir git
-git clone --recursive --branch release/v3.3 https://github.com/espressif/ESP8266_RTOS_SDK.git
-cd ESP8266_RTOS_SDK 
-python -m pip install --user -r ./requirements.txt
-cd ..
+cd ~/esp
+git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
+cd ESP8266_RTOS_SDK/
+pip install -r requirements.txt
 ```
 
 ### Get Coremark
